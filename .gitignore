@@ -1,0 +1,16 @@
+venv/
+.env/
+__pycache__/
+.env
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.development
+.env.test
+.env.production
+venv/
+mimic-iii-clinical-notes/
+mimic-iv-ext-direct-1.0.0/
+finished/
