@@ -32,7 +32,7 @@ def query_vector_db(query):
 
     context = "\n\n".join(context_texts)
 
-    genai.configure(api_key="AIzaSyChlV4vyWR-HeFFp0kB6DC0XxzexeEcHJk")
+    genai.configure(api_key="")
     model = genai.GenerativeModel("models/gemini-2.0-flash")
 
     prompt = f"""You are an expert clinical diagnostic reasoning assistant specializing in evidence-based medical diagnosis. Your role is to analyze clinical presentations and provide structured, evidence-based diagnostic reasoning.
