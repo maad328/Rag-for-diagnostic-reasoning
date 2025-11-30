@@ -1,6 +1,24 @@
+import os
+import streamlit as st
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 import google.generativeai as genai
+
+
+def get_api_key():
+    """Get API key from Streamlit secrets or environment variable."""
+    # Try Streamlit secrets first (for Streamlit Cloud)
+    try:
+        return st.secrets["GEMINI_API_KEY"]
+    except Exception:
+        pass
+    
+    # Fall back to environment variable (for local development)
+    api_key = os.getenv("GEMINI_API_KEY")
+    if api_key:
+        return api_key
+    
+    raise ValueError("GEMINI_API_KEY not found. Set it in Streamlit secrets or environment variable.")
 
 
 def query_vector_db(query):
@@ -32,7 +50,7 @@ def query_vector_db(query):
 
     context = "\n\n".join(context_texts)
 
-    genai.configure(api_key="")
+    genai.configure(api_key=get_api_key())
     model = genai.GenerativeModel("models/gemini-2.0-flash")
 
     prompt = f"""You are an expert clinical diagnostic reasoning assistant specializing in evidence-based medical diagnosis. Your role is to analyze clinical presentations and provide structured, evidence-based diagnostic reasoning.
